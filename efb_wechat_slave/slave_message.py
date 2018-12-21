@@ -69,7 +69,10 @@ class SlaveMessageManager:
 
                 efb_msg.deliver_to = coordinator.master
 
-                coordinator.send_message(efb_msg)
+                # skip mp message
+                if not chat.vendor_specific['is_mp']:
+                    coordinator.send_message(efb_msg)
+
                 if efb_msg.file:
                     efb_msg.file.close()
 
